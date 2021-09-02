@@ -6,10 +6,11 @@ import "./HeroTeam.css"
 import SingleHero from "./SingleHero";
 import MyTeam from "./MyTeam";
 
-const HeroTeam = () => {
+const HeroTeam = props => {
     const [heroes, setHeroes] = useState([])
     const [filteredHeroes, setFilteredHeroes] = useState([]);
     const [typing, setTyping] = useState("");
+    const [team, setTeam] = useState([])
 
     useEffect(() => {
         getHeroes()
@@ -29,6 +30,8 @@ const HeroTeam = () => {
         setFilteredHeroes(filtered);
         setTyping("")
     }
+
+    console.log(team)
 
     return (
         <div>
@@ -53,12 +56,12 @@ const HeroTeam = () => {
                     <div className="row">
                         {
                         filteredHeroes.map((hero, index) => (
-                            <SingleHero hero={hero} key={index} />
+                            <SingleHero team={team} setTeam={setTeam} hero={hero} key={index} />
                         ))
                         }
                     </div>
                 </div>
-                <MyTeam />
+                <MyTeam team={team}/>
             </div>
                         
 

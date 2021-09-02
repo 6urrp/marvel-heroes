@@ -1,6 +1,16 @@
+import { useState } from "react"
+
 import "./SingleHero.css"
 
 const SingleHero = props => {
+
+    const onClick = () => {
+        props.setTeam(props.team.concat({
+            name: props.hero.name,
+            img: `${props.hero.thumbnail.path}.${props.hero.thumbnail.extension}`
+        }))
+    }
+    
 
     return (
         <div className="card col s8 m6 l4">
@@ -11,8 +21,8 @@ const SingleHero = props => {
                 <img className="activator responsive-img" id="hero-img" src={`${props.hero.thumbnail.path}.${props.hero.thumbnail.extension}`} />
             </div>
             <div className="buttons center">
-                <a className="waves-effect waves-light btn">Info</a>
-                <a className="waves-effect waves-light btn">Add</a>
+                <button className="waves-effect waves-light btn">Info</button>
+                <button className="waves-effect waves-light btn" onClick={onClick}>Add</button>
             </div>
         </div>
 
