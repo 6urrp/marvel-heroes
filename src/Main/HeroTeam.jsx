@@ -8,13 +8,27 @@ import MyTeam from "./MyTeam";
 
 const HeroTeam = () => {
     const [heroes, setHeroes] = useState([])
+    const [filteredHeroes, setFilteredHeroes] = useState([]);
+    const [typing, setTyping] = useState("");
 
     useEffect(() => {
         getHeroes()
-            .then(heroes => setHeroes(heroes));
+            .then(heroes => {
+                setHeroes(heroes);
+                setFilteredHeroes(heroes)
+            });
     }, []);
 
-    console.log(heroes);
+    const onSearchHandler = (event) => {
+        setTyping(event.target.value);
+    }
+
+    const onButtonGoHandler = e => {
+        e.preventDefault();
+        let filtered = filteredHeroes.filter(hero => hero.name.includes(typing));
+        setFilteredHeroes(filtered);
+        setTyping("")
+    }
 
     return (
         <div>
@@ -25,21 +39,20 @@ const HeroTeam = () => {
             <div className="row">
                 <div className="col s7 m7 l8 xl9">
                     <div className="row">
-                        <form className="col s12">
+                        <div className="col s12">
                             <div className="row">
                                 <div className="input-field col s3">
-                                    <input id="input_text" type="text" data-length="10" />
-                                    <label for="input_text">Search your hero...</label>
+                                    <input id="input_text" type="text" value={typing} onChange={onSearchHandler} placeholder="Search..." />
                                 </div>
                                 <div className="col s3">
-                                    <a className="waves-effect waves-light btn">go</a>
+                                    <button className="waves-effect waves-light btn" onClick={onButtonGoHandler}>go</button>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
                     <div className="row">
                         {
-                        heroes.map((hero, index) => (
+                        filteredHeroes.map((hero, index) => (
                             <SingleHero hero={hero} key={index} />
                         ))
                         }
