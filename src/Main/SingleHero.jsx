@@ -1,16 +1,21 @@
-import { Button } from "react-materialize";
+import "./SingleHero.css"
 
 const SingleHero = props => {
 
     return (
-        <div className="">
-            <h3>{props.hero.name}</h3>
-            <div>
-                <img src={`${props.hero.thumbnail.path}.${props.hero.thumbnail.extension}`}/>
+        <div className="card col s8 m6 l4">
+            <div className="card-content" id="card-pd">
+                <span class="card-title activator grey-text text-darken-4">{props.hero.name}</span>
             </div>
-            <Button>Info</Button>
-            <Button>Add</Button>
+            <div className="card-image waves-effect waves-block waves-light">
+                <img className="activator responsive-img" id="hero-img" src={`${props.hero.thumbnail.path}.${props.hero.thumbnail.extension}`} />
+            </div>
+            <div className="buttons center">
+                <a className="waves-effect waves-light btn">Info</a>
+                <a className="waves-effect waves-light btn">Add</a>
+            </div>
         </div>
+
     )
 }
 
